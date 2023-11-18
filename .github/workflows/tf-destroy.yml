@@ -1,13 +1,13 @@
 name: "Terraform Deployment"
 on:
-  push:
+  workflow_dispatch:
     branches:
       - main
-  pull_request:
+      - test
+
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
-      pull-requests: write # This is required for gh bot to comment PR
 env:
   TF_LOG: INFO
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -50,12 +50,10 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      - name: Terraform Plan
+      - name: Terraform Plan Destroy
         id: plan
-        run: terraform plan -no-color
-        if: github.event_name == 'pull_request'
+        run: terraform plan destroy -no-color
         continue-on-error: true
 
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+      - name: Terraform Destroy
+        run: terraform apply destroy -auto-approve -input=false
