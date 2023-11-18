@@ -1,6 +1,6 @@
 
 locals {
-  service_name = var.service_name
+  service_name = "luciano-lionello"
   tags         = { "scope" = "eko" }
   image        = "public.ecr.aws/aws-containers/hello-app-runner:latest"
   port         = 8000
@@ -48,7 +48,7 @@ resource "aws_apprunner_service" "service" {
       }
 
       image_identifier      = local.image
-      image_repository_type = "ECR Public"
+      image_repository_type = "ECR_PUBLIC"
     }
   }
 
