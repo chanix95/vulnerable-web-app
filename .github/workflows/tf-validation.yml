@@ -17,7 +17,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: .
+        working-directory: ./terraform
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
@@ -48,11 +48,10 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: cd terraform && terraform validate -no-color
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
-        run: cd terraform && terraform plan -no-color
+        run: terraform plan -no-color
         if: github.event_name == 'pull_request'
         continue-on-error: true
-
