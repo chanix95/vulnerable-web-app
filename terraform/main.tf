@@ -8,7 +8,7 @@ locals {
 }
 
 resource "aws_apprunner_auto_scaling_configuration_version" "autoscaling_configuration" {
-  auto_scaling_configuration_name = "${local.service_name}-autoscaling-configuration"
+  auto_scaling_configuration_name = "${local.service_name}-asc-conf"
 
   max_concurrency = 100
   max_size        = 2
