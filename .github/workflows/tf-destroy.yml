@@ -52,8 +52,8 @@ jobs:
 
       - name: Terraform Plan Destroy
         id: plan
-        run: terraform plan destroy -no-color
+        run: terraform plan -destroy -no-color
         continue-on-error: true
 
       - name: Terraform Destroy
-        run: terraform apply destroy -auto-approve -input=false
+        run: terraform apply -destroy -auto-approve -input=false
