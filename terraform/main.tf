@@ -34,6 +34,10 @@ resource "aws_apprunner_service" "service" {
   }
 
   source_configuration {
+    authentication_configuration {
+      access_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/apprunner.amazonaws.com/AWSServiceRoleForAppRunner"
+
+    }
 
     # Must be false when using public images or cross account images
     auto_deployments_enabled = false
