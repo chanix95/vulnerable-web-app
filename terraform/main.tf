@@ -63,7 +63,9 @@ resource "aws_ecr_repository" "application_registry" {
   image_scanning_configuration {
     scan_on_push = true
   }
-  tags = local.tags
+
+  force_delete = true
+  tags         = local.tags
 
 }
 
