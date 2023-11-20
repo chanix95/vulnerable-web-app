@@ -71,7 +71,7 @@ data "aws_iam_policy_document" "ecr_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["task.apprunner.amazonaws.com"]
+      identifiers = ["apprunner.amazonaws.com"]
     }
 
     actions = [
