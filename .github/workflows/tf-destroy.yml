@@ -2,8 +2,7 @@ name: "Terraform Destroy"
 on:
   workflow_dispatch:
     branches:
-      - main
-      - test
+      - master
 
 permissions:
       id-token: write # This is required for aws oidc connection

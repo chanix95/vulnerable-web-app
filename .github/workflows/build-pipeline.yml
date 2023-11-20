@@ -1,5 +1,8 @@
 name: "Build Application"
 on:
+  workflow_dispatch:
+    branches:
+      - master
   push:
     paths:
       - src/*
