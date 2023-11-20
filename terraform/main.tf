@@ -7,7 +7,7 @@ terraform {
 data "aws_caller_identity" "current" {}
 
 locals {
-  service_name = "luciano-lionello"
+  service_name = "eko-sample"
   tags         = { "scope" = "eko" }
   image        = "${aws_ecr_repository.application_registry.repository_url}:${var.image_tag}"
   port         = 8080
