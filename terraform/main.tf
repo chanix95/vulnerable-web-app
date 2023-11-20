@@ -27,8 +27,8 @@ resource "aws_apprunner_auto_scaling_configuration_version" "autoscaling_configu
 
 resource "aws_apprunner_service" "service" {
 
-  auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.autoscaling_configuration.arn
-  service_name                   = local.service_name
+  #auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.autoscaling_configuration.arn
+  service_name = local.service_name
 
   health_check_configuration {
     healthy_threshold   = 1
