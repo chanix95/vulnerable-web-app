@@ -70,8 +70,8 @@ data "aws_iam_policy_document" "ecr_policy" {
     effect = "Allow"
 
     principals {
-      type        = "Service"
-      identifiers = ["apprunner.amazonaws.com"]
+      type        = "AWS"
+      identifiers = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/apprunner.amazonaws.com/AWSServiceRoleForAppRunner"
     }
 
     actions = [
