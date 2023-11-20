@@ -4,7 +4,6 @@ on:
     workflows: [ "Build Application"]
     types:
       - completed
-  pull_request:
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
@@ -15,7 +14,7 @@ env:
 jobs:
   deploy:
     env:
-      TF_VAR_image_tag: 'latest'
+      TF_VAR_image_tag: ${{ events.workflow_run.run_id }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -56,9 +55,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color
-        if: github.event_name == 'pull_request'
         continue-on-error: true
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push' || github.event_name == 'workflow_run'
         run: terraform apply -auto-approve -input=false -lock=true
