@@ -72,6 +72,8 @@ resource "aws_ecr_repository" "application_registry" {
   }
   tags = local.tags
 
+  object_lock_enabled = true
+
 }
 
 
