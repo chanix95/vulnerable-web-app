@@ -4,10 +4,22 @@ on:
     workflows: [ "Build Application"]
     types:
       - completed
+    inputs:
+      tag:
+        default: 'latest'
+        required: false
   push:
     branches:
       - master
+    inputs:
+      tag:
+        default: 'latest'
+        required: false
   pull_request:
+    inputs:
+      tag:
+        required: false
+        default: 'latest'
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
@@ -18,7 +30,7 @@ env:
 jobs:
   deploy:
     env:
-      TF_VAR_image_tag: ${{ context.payload.workflow_run.id  }}
+      TF_VAR_image_tag: ${{ inputs.tag }}
     runs-on: ubuntu-latest
     defaults:
       run:
