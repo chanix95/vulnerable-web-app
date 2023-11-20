@@ -1,6 +1,10 @@
 terraform {
   backend "s3" {}
 }
+
+
+data "aws_iam_account_alias" "current" {}
+
 locals {
   service_name = "luciano-lionello"
   tags         = { "scope" = "eko" }
@@ -58,4 +62,49 @@ resource "aws_apprunner_service" "service" {
 
 }
 
+resource "aws_ecr_repository" "application_registry" {
+  name                 = "vulnerable-web-app"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+  tags = local.tags
+
+}
+
+
+data "aws_iam_policy_document" "ecr_policy" {
+  statement {
+    sid    = "new policy"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${data.aws_iam_account_alias.current.id}"]
+    }
+
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:PutImage",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload",
+      "ecr:DescribeRepositories",
+      "ecr:GetRepositoryPolicy",
+      "ecr:ListImages",
+      "ecr:DeleteRepository",
+      "ecr:BatchDeleteImage",
+      "ecr:SetRepositoryPolicy",
+      "ecr:DeleteRepositoryPolicy",
+    ]
+  }
+}
+
+resource "aws_ecr_repository_policy" "ecr_policy" {
+  repository = aws_ecr_repository.application_registry.name
+  policy     = data.aws_iam_policy_document.ecr_policy.json
+}
 
