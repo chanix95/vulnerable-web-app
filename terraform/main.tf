@@ -44,7 +44,7 @@ resource "aws_apprunner_service" "service" {
       }
 
       image_identifier      = local.image
-      image_repository_type = "ECR_PUBLIC"
+      image_repository_type = "ECR"
     }
   }
 
