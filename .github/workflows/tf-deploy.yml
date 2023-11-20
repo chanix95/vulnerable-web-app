@@ -14,7 +14,7 @@ env:
 jobs:
   deploy:
     env:
-      TF_VAR_image_tag: ${{ github.event.number }}
+      TF_VAR_image_tag: ${{ context.payload.workflow_run.id }}
     runs-on: ubuntu-latest
     defaults:
       run:
