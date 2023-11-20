@@ -4,8 +4,6 @@ on:
     branches:
       - master
   push:
-    paths:
-      - src/*
     branches:
       - master
 permissions:
