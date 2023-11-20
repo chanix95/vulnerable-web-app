@@ -43,6 +43,20 @@ jobs:
           node-version: '8'
       - name: Unit Test
         run: npm run test
+  test:
+    name: Audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./src
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '8'
+      - name: Audit
+        run: npm audit
   build:
     runs-on: ubuntu-latest
     defaults:
