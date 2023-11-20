@@ -1,5 +1,9 @@
 name: "Terraform Deployment"
 on:
+  workflow_run:
+    workflows: [ "Build Application"]
+    types:
+      - completed
   push:
     branches:
       - master
@@ -13,6 +17,8 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
 jobs:
   deploy:
+    env:
+      TF_VAR_image_tag: "latest"
     runs-on: ubuntu-latest
     defaults:
       run:
