@@ -43,7 +43,7 @@ jobs:
           node-version: '8'
       - name: Unit Test
         run: npm run test
-  test:
+  audit:
     name: Audit
     runs-on: ubuntu-latest
     defaults:
