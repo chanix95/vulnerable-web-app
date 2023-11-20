@@ -35,7 +35,7 @@ resource "aws_apprunner_service" "service" {
 
   source_configuration {
     authentication_configuration {
-      access_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/apprunner.amazonaws.com/AWSServiceRoleForAppRunner"
+      access_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Apprunner-ECR-Access-Role"
 
     }
 
