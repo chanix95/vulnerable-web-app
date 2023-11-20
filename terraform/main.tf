@@ -1,4 +1,6 @@
-
+terraform {
+  backend "s3" {}
+}
 locals {
   service_name = "luciano-lionello"
   tags         = { "scope" = "eko" }
