@@ -10,7 +10,7 @@ locals {
   service_name = "luciano-lionello"
   tags         = { "scope" = "eko" }
   image        = "${aws_ecr_repository.application_registry.repository_url}:${var.image_tag}"
-  port         = 8000
+  port         = 8080
 
 }
 
