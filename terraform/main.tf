@@ -3,7 +3,8 @@ terraform {
 }
 
 
-data "aws_iam_account_alias" "current" {}
+
+data "aws_caller_identity" "current" {}
 
 locals {
   service_name = "luciano-lionello"
@@ -81,7 +82,7 @@ data "aws_iam_policy_document" "ecr_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${data.aws_iam_account_alias.current.id}"]
+      identifiers = [data.aws_caller_identity.current.account_id]
     }
 
     actions = [
