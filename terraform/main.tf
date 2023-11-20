@@ -14,20 +14,9 @@ locals {
 
 }
 
-resource "aws_apprunner_auto_scaling_configuration_version" "autoscaling_configuration" {
-  auto_scaling_configuration_name = "${local.service_name}-asc-conf"
-
-  max_concurrency = 100
-  max_size        = 2
-  min_size        = 1
-
-  tags = local.tags
-
-}
 
 resource "aws_apprunner_service" "service" {
 
-  #auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.autoscaling_configuration.arn
   service_name = local.service_name
 
   health_check_configuration {
